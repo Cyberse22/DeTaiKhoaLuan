@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
+from cloudinary.models import CloudinaryField
 
 
 class BaseModel(models.Model):
@@ -19,7 +20,7 @@ class ChucVu(models.TextChoices):
 
 
 class User(AbstractUser):
-    avatar = models.ImageField(upload_to='upload/%Y/%m')
+    avatar = CloudinaryField('avatar',  null=True)
     chucvu = models.CharField(max_length=20, choices=ChucVu.choices, default=ChucVu.SINHVIEN)
 
     class Meta:

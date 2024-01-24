@@ -5,29 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60acd8e9-e5dc-4577-9cb1-1030f4ee39ff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/detai10.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/detai10/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/detai10/asgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/detai10/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/detai10/wsgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis/migrations/0003_alter_user_options_alter_diemkhoaluan_nhanxet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis/static/css/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis/static/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis/templates/admin/thesis-stats.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thesis/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thesis/migrations/0004_alter_user_avatar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/detai10/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/detai10/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thesis/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/thesis/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +24,27 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;2151013046Kiet&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="3183290c-119f-4512-b856-5ad5d0d24199" />
+        <option name="url" value="https://github.com/Cyberse22/DeTaiKhoaLuan.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -57,18 +58,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/kieth/OneDrive/Desktop/DeTaiKhoaLuan/detai10",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/kieth/OneDrive/Desktop/DeTaiKhoaLuan/detai10&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kieth\OneDrive\Desktop\DeTaiKhoaLuan\detai10" />
