@@ -6,7 +6,7 @@ from django.utils.html import mark_safe
 from django import forms
 from django.urls import path
 
-from .models import User, HoiDongBaoVe, KhoaLuan, DiemKhoaLuan
+from .models import User, HoiDongBaoVe, KhoaLuan, DiemKhoaLuan, SinhVienThucHien, GiangVienHuongDan
 
 
 class ThesisAdminSite(admin.AdminSite):
@@ -47,9 +47,24 @@ class UserAdmin(admin.ModelAdmin):
         js = ('/static/js/script.js',)
 
 
+
+class SinhVienThucHienInline(admin.TabularInline):
+    model = SinhVienThucHien
+    extra = 2
+
+
+class GiangVienHuongDanInline(admin.TabularInline):
+    model = GiangVienHuongDan
+    extra = 2
+
+
+class KhoaLuanAdmin(admin.ModelAdmin):
+    inlines = [SinhVienThucHienInline, GiangVienHuongDanInline]
+
+
 admin_site.register(User, UserAdmin)
 admin_site.register(HoiDongBaoVe)
-admin_site.register(KhoaLuan)
+admin_site.register(KhoaLuan, KhoaLuanAdmin)
 admin_site.register(DiemKhoaLuan)
 admin_site.register(Permission)
 admin_site.register(Group)
