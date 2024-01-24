@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60acd8e9-e5dc-4577-9cb1-1030f4ee39ff" name="Changes" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/thesis/migrations/0005_remove_khoaluan_giangvienhuongdan_and_more.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/thesis/migrations/0006_hoidongbaove_tenhoidong.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/thesis/paginators.py" afterDir="false" />
@@ -16,6 +17,12 @@
       <change beforePath="$PROJECT_DIR$/thesis/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/thesis/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/thesis/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/thesis/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/thesis/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/thesis/views.py" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/thesis/migrations/0004_alter_user_avatar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/detai10/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/detai10/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thesis/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/thesis/models.py" afterDir="false" />
+>>>>>>> 8aaa4a2e70d590e1c3903eb696488f49434e5d13
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -2,7 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 from cloudinary.models import CloudinaryField
+<<<<<<< HEAD
 from django.core.exceptions import ValidationError
+=======
+>>>>>>> 8aaa4a2e70d590e1c3903eb696488f49434e5d13
 
 
 class BaseModel(models.Model):

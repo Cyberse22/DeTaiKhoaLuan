@@ -70,6 +70,10 @@ MIDDLEWARE = [
 ]
 
 import pymysql
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8aaa4a2e70d590e1c3903eb696488f49434e5d13
 pymysql.install_as_MySQLdb()
 
 ROOT_URLCONF = 'detai10.urls'
