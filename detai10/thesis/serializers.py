@@ -6,7 +6,7 @@ from rest_framework import serializers
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'first_name', 'last_name', 'password', 'email', 'chucvu']
+        fields = ['id', 'username', 'avatar', 'first_name', 'last_name', 'password', 'email', 'chucvu']
         extra_kwargs = {
             'password': {
                 'write_only': True
@@ -53,4 +53,4 @@ class HoiDongBaoVeSerializer(ModelSerializer):
 class DiemKhoaLuanSerializer(ModelSerializer):
     class Meta:
         model = DiemKhoaLuan
-        fields = '__all__'
+        fields = ['khoaluan', 'hoidongchamdiem', 'diem', 'nhanxet']

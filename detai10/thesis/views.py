@@ -1,6 +1,8 @@
 from rest_framework.response import Response
 from rest_framework import viewsets, permissions, generics, parsers, status
 from rest_framework.decorators import action
+from django.contrib.auth import authenticate, login
+from django.shortcuts import redirect, render
 
 from thesis.models import User, KhoaLuan, HoiDongBaoVe, DiemKhoaLuan
 from thesis.serializers import UserSerializer, UserChangePasswordSerializer, KhoaLuanSerializer, HoiDongBaoVeSerializer, \
@@ -25,32 +27,115 @@ class UserViewSet(viewsets.ModelViewSet, generics.CreateAPIView, generics.Update
         return Response(serializers.UserSerialzier(request.user).data)
 
     @action(methods=['put'], detail=True)
-    def chang_password(self, request, pk=None):
+    def chang_password(self, request):
         user = self.get_object()
-        serializers = UserChangePasswordSerializer(data=request.data)
+        serializer = UserChangePasswordSerializer(data=request.data)
 
-        if serializers.is_valid():  # Kiểm tra mật khẩu cũ
-            if not user.check_password(serializers.validated_data['old_password']):
+        if serializer.is_valid():  # Kiểm tra mật khẩu cũ
+            if not user.check_password(serializer.validated_data['old_password']):
                 return Response({'old_password': 'Mật khẩu không đúng.'}, status=status.HTTP_400_BAD_REQUEST)
 
-            user.set_password(serializers.validated_data['new_password'])
+            user.set_password(serializer.validated_data['new_password'])
             user.save()
 
             return Response({'message': 'Mật khẩu đã được thay đổi.'}, status=status.HTTP_200_OK)
 
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class KhoaLuanViewSet(viewsets.ModelViewSet):
     queryset = KhoaLuan.objects.filter()
     serializer_class = KhoaLuanSerializer
+    pagination_class = paginators.ThesisPaginator
+    parser_classes = [parsers.FileUploadParser]
+
+    def get_permissions(self):
+        if self.action == 'giaovukhoa_action':
+            return [permissions.IsAuthenticated(), perms.IsGiaoVuKhoa()]
+        elif self.action == 'admin_action':
+            return [perms.IsAdminOrReadOnly()]
+        return [permissions.AllowAny()]
+
+    # @action(methods=['get'], detail=False)
+    # def giaovukhoa_action(self, request):
+    #     if not perms.IsGiaoVuKhoa().has_permission(request, self):
+    #         return Response({"message": "Bạn không có quyền truy cập"}, status=status.HTTP_403_FORBIDDEN)
+    #     return Response(serializers.UserSerialzier(request.user).data)
+    #
+    # @action(methods=['get'], detail=False)
+    # def admin_action(self, request):
+    #     # Kiểm tra quyền ở đây
+    #     if not perms.IsAdminOrReadOnly().has_permission(request, self):
+    #         return Response({"message": "Bạn không có quyền truy cập"}, status=status.HTTP_403_FORBIDDEN)
+    #
+    #     return Response({"message": "Chỉ admin mới có thể truy cập"})
+    #
+    @action(methods=['post'], detail=False)
+    def giaovukhoa_themkhoaluan(self, request):
+        khoaluan_data = request.data.get('khoaluan', {})
+        sinhvien_data = request_data.get('sinhvien', [])
+        giangvien_data = request_data.get('giangvien', [])
+
+        khoaluan_serializer = KhoaLuanSerializer(data=khoaluan_data)
+        if khoaluan_serializer.is_valid():
+            khoaluan_instance = khoaluan_serializer.save()
+            khoaluan_instance.sinhvien.set(sinhvien_data)
+            khoaluan_instance.giangvien.set(giangvien_data)
+            return Response({"message": "Ghi nhận khóa luận thành công"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Dữ liệu không hợp lệ"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class HoiDongBaoVeViewSet(viewsets.ModelViewSet):
     queryset = HoiDongBaoVe.objects.filter()
     serializer_class = HoiDongBaoVeSerializer
+    pagination_class = paginators.GuardPaginator
+
+    def get_permissions(self):
+        if self.action == 'giaovukhoa_action':
+            return [permissions.IsAuthenticated(), perms.IsGiaoVuKhoa()]
+        elif self.action == 'admin_action':
+            return [perms.IsAdminOrReadOnly()]
+        return [permissions.AllowAny()]
+
+    @action(methods=['post'], detail=False)
+    def them_giangvien(self, request):
+        if not perms.IsGiaoVuKhoa().has_permission(request, self):
+            return Response({"message": "Bạn không có quyền thêm giảng viên vào hội đồng"},
+                            status=status.HTTP_403_FORBIDDEN)
+
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+
+            if user.chucvu != 'GiangVien':
+                return Response({"error": "Người dùng không phải là giảng viên"}, status=status.HTTP_400_BAD_REQUEST)
+
+            hoidongbaove = HoiDongBaoVe.object.get_or_create()
+
+            hoidongbaove.giangvien_set.add(user)
+            return Response({"message": "Thêm giảng viên vào hội đồng bảo vệ thành công"}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"message": "Dữ liệu không hợp lệ"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class DiemKhoaLuanViewSet(viewsets.ModelViewSet):
     queryset = DiemKhoaLuan.objects.filter()
     serializer_class = DiemKhoaLuanSerializer
+    pagination_class = paginators.GradePaginator
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('http://127.0.0.1:8000/')
+        else:
+            return render(request, 'index.html', {'error_message': 'Invalid'})
+    else:
+        return render(request, 'login.html')

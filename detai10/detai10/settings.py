@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'oauth2_provider',
-    'cloudinary'
+    'cloudinary',
+    'debug_toolbar'
 ]
 
 REST_FRAMEWORK = {
@@ -70,10 +71,6 @@ MIDDLEWARE = [
 ]
 
 import pymysql
-<<<<<<< HEAD
-=======
-
->>>>>>> 8aaa4a2e70d590e1c3903eb696488f49434e5d13
 pymysql.install_as_MySQLdb()
 
 ROOT_URLCONF = 'detai10.urls'
@@ -161,6 +158,13 @@ CKEDITOR_UPLOAD_PATH = 'nhanxet/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-OAUTH2_PROVIDER = {
-    'OAUTH2_BACKEND_CLASS': 'oauth2_provider.oauth2_backends.JSONOAuthLibCore'
-}
+#  Django OAuth2
+CLIENT_ID = '4gqKA0wm0ozqgcuJi4IOJ1uCLMjChtWrlXSkff1D'
+CLIENT_SECRET = 'e0JJP1yavHTRocBNQ2lYaNdrlc8ZMmtoZN14ZAjulPUOrbIWZotA2rP569s72P221yw23b8FsZlI4CA2Mbm0fA4jrPXaQ0PIYkPDFA0WcZjPInFd2CmMqb81MumtfJjV'
+#
+#
+# OAUTH2_PROVIDER = {
+#     # other OAUTH2 settings
+#     'OAUTH2_BACKEND_CLASS': 'oauth2_provider.oauth2_backends.JSONOAuthLibCore'
+# }
+
