@@ -75,7 +75,7 @@ class HoiDongBaoVe(BaseModel):
     khoaluan = models.ManyToManyField(KhoaLuan, related_name='khoaluan')
 
 
-class TieuChiChamDiem(BaseModel):
+class TieuChiChamDiem(models.Model):
     tieuchi1 = models.DecimalField(max_digits=5, decimal_places=2)
     tieuchi2 = models.DecimalField(max_digits=5, decimal_places=2)
     tieuchi3 = models.DecimalField(max_digits=5, decimal_places=2)

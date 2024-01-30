@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'oauth2_provider',
     'cloudinary',
-    'debug_toolbar'
+    'debug_toolbar',
 ]
 
 REST_FRAMEWORK = {
@@ -106,9 +106,9 @@ DATABASES = {
     }
 }
 
-# INTERNAL_IPS = [
-#     "127.0.0.1",
-# ]
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 MEDIA_ROOT = '%s/khoaluan/static/' % BASE_DIR
 
@@ -149,7 +149,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 CKEDITOR_UPLOAD_PATH = 'nhanxet/'
 

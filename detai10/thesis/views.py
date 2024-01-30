@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, render
 
-from thesis.models import User, KhoaLuan, HoiDongBaoVe, DiemKhoaLuan
+from thesis.models import User, KhoaLuan, HoiDongBaoVe, DiemKhoaLuan, TieuChiChamDiem
 from thesis.serializers import UserSerializer, UserChangePasswordSerializer, KhoaLuanSerializer, HoiDongBaoVeSerializer, \
     DiemKhoaLuanSerializer
 from thesis import perms, serializers, paginators
@@ -117,7 +117,6 @@ class HoiDongBaoVeViewSet(viewsets.ModelViewSet):
             return Response({"message": "Thêm giảng viên vào hội đồng bảo vệ thành công"}, status=status.HTTP_201_CREATED)
         else:
             return Response({"message": "Dữ liệu không hợp lệ"}, status=status.HTTP_400_BAD_REQUEST)
-
 
 class DiemKhoaLuanViewSet(viewsets.ModelViewSet):
     queryset = DiemKhoaLuan.objects.filter()
