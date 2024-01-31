@@ -1,15 +1,14 @@
 from django.urls import path, include
 from . import views
-from django.contrib.auth import views as auth_views
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register('user', views.UserViewSet)
-router.register('thesis', views.KhoaLuanViewSet)
-router.register('council', views.HoiDongBaoVeViewSet)
-router.register('grade', views.DiemKhoaLuanViewSet)
+router.register('sinhvien', views.SinhVienThesisViewSet, basename='sinhvien')
+router.register('giaovukhoa', views.GiaoVuKhoaThesisViewSet, basename='giaovukhoa')
+router.register('council', views.HoiDongBaoVeViewSet, basename='council')
+router.register('grade', views.DiemKhoaLuanViewSet, basename='grade')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('login/', auth_views.LoginView.as_view(template_name="login.html"), name="login")
 ]

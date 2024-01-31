@@ -10,7 +10,7 @@ class ThesisPaginator(PageNumberPagination):
 
 
 class GuardPaginator(PageNumberPagination):
-    page_size = 4
+    page_size = 5
 
 
 class GradePaginator(PageNumberPagination):

@@ -3,6 +3,9 @@ from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 from cloudinary.models import CloudinaryField
 from django.core.exceptions import ValidationError
+from django.db.models import Sum
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class BaseModel(models.Model):
@@ -38,6 +41,8 @@ class KhoaLuan(BaseModel):
     sinhvien = models.ManyToManyField(User, through="SinhVienThucHien", related_name="khoaluan_sv")
     giangvien = models.ManyToManyField(User, through="GiangVienHuongDan", related_name="khoaluan_gv")
     baikhoaluan = models.FileField(upload_to='baikhoaluan/', default=baikhoaluan_default)
+    xacnhan = models.BooleanField(default=False)
+    ghichu = models.TextField(blank=True, null=True)
     ngaybaove = models.DateField()
     dabaove = models.BooleanField(default=False)
 
@@ -66,15 +71,6 @@ class GiangVienHuongDan(BaseModel):
             raise ValidationError("Tối đa hai giảng viên hướng dẫn.")
 
 
-class HoiDongBaoVe(BaseModel):
-    tenhoidong = models.CharField(max_length=255, unique=True, null=True)
-    chutich = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chutich')
-    thuky = models.ForeignKey(User, on_delete=models.CASCADE, related_name='thuky')
-    phanbien = models.ForeignKey(User, on_delete=models.CASCADE, related_name='phanbien')
-    thanhvienkhac = models.ManyToManyField(User, related_name='thanhvienkhac')
-    khoaluan = models.ManyToManyField(KhoaLuan, related_name='khoaluan')
-
-
 class TieuChiChamDiem(models.Model):
     tieuchi1 = models.DecimalField(max_digits=5, decimal_places=2)
     tieuchi2 = models.DecimalField(max_digits=5, decimal_places=2)
@@ -87,8 +83,37 @@ class TieuChiChamDiem(models.Model):
         super(TieuChiChamDiem, self).save(*args, **kwargs)
 
 
+class HoiDongBaoVe(BaseModel):
+    tenhoidong = models.CharField(max_length=255, unique=True, null=True)
+    chutich = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chutich')
+    thuky = models.ForeignKey(User, on_delete=models.CASCADE, related_name='thuky')
+    phanbien = models.ForeignKey(User, on_delete=models.CASCADE, related_name='phanbien')
+    thanhvienkhac = models.ManyToManyField(User, related_name='thanhvienkhac')
+    khoaluan = models.ManyToManyField(KhoaLuan, related_name='khoaluan')
+    chamdiem = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+
+
+@receiver(post_save, sender=TieuChiChamDiem)
+def update_chamdiem(sender, instace, **kwargs):
+    tieuchi_diemchinhthuc = TieuChiChamDiem.objects.aggregate(
+        sum_tieuchi=Sum('diemchinhthuc')
+    )['sum_tieuchi']
+
+    HoiDongBaoVe.objects.all().update(chamdiem=tieuchi_diemchinhthuc)
+
+
 class DiemKhoaLuan(BaseModel):
     khoaluan = models.ForeignKey(KhoaLuan, on_delete=models.CASCADE, related_name='diemkhoaluan')
     hoidongchamdiem = models.ForeignKey(HoiDongBaoVe, on_delete=models.CASCADE, related_name='hoidongchamdiem')
     diem = models.DecimalField(max_digits=5, decimal_places=2)
     nhanxet = RichTextField()
+
+
+@receiver(post_save, sender=HoiDongBaoVe)
+def update_diem_khoaluan(sender, instance, **kwargs):
+    diem_khoaluan = DiemKhoaLuan.objects.get_or_create(
+        khoaluan=instance.khoaluan,
+        hoidongchamdiem=instance
+    )[0]
+    diem_khoaluan.diem = instance.chamdiem
+    diem_khoaluan.save()

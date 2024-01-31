@@ -38,10 +38,16 @@ class UserChangePasswordSerializer(serializers.Serializer):
         return data
 
 
-class KhoaLuanSerializer(ModelSerializer):
+class SinhVienThesisSerializer(ModelSerializer):
     class Meta:
         model = KhoaLuan
-        fields = '__all__'
+        fields = ['tenkhoaluan', 'sinhvien', 'baikhoaluan']
+
+
+class GiaoVuKhoaThesisSerializer(ModelSerializer):
+    class Meta:
+        model = KhoaLuan
+        fields = ['tenkhoaluan', 'xacnhan', 'ngaybaove', 'dabaove', 'ghichu']
 
 
 class HoiDongBaoVeSerializer(ModelSerializer):
