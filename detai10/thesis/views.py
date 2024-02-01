@@ -25,7 +25,7 @@ class UserViewSet(viewsets.ModelViewSet, generics.CreateAPIView, generics.Update
 
         return [permissions.AllowAny()]
 
-    @action(methods=['get'], url_path='user/(?P<role>\w+)', url_name='user', detail=False)
+    @action(methods=['get'], url_path='user/(?P<role>\w+)', url_name='user/(?P<role>\w+)', detail=False)
     def current_user(self, request, role):
         if role == 'sinhvien':
             response_data = {'role': 'sinhvien'}
