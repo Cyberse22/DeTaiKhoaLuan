@@ -47,7 +47,7 @@ class SinhVienThesisSerializer(ModelSerializer):
 class GiaoVuKhoaThesisSerializer(ModelSerializer):
     class Meta:
         model = KhoaLuan
-        fields = ['tenkhoaluan', 'xacnhan', 'ngaybaove', 'dabaove', 'ghichu']
+        fields = ['tenkhoaluan', 'sinhvien', 'xacnhan', 'ngaybaove', 'dabaove', 'ghichu']
 
 
 class HoiDongBaoVeSerializer(ModelSerializer):
